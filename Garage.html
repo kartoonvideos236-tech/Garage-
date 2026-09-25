@@ -3,56 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1a73e8">
 <title>Garage Service Reminder</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
-  body { background: #eef1f6; padding: 12px; padding-bottom: 80px; }
-  .container { max-width: 520px; margin: auto; }
-  .box { background: white; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-  h2 { color: #1a73e8; margin-bottom: 12px; font-size: 20px; }
-  h3 { color: #333; margin-bottom: 8px; font-size: 16px; }
-  input, select, textarea, button { width: 100%; padding: 12px; margin: 6px 0; border-radius: 8px; border: 1px solid #ccd2dd; font-size: 15px; background: white; }
-  textarea { resize: vertical; min-height: 60px; }
-  button { background: #1a73e8; color: white; border: none; cursor: pointer; font-weight: bold; transition: 0.2s; }
-  button:active { transform: scale(0.98); }
-  .btn-green { background: #25D366; }
-  .btn-orange { background: #ff6b00; }
-  .btn-red { background: #e53935; }
-  .btn-gray { background: #6b7280; }
-  .btn-sm { padding: 8px 12px; font-size: 13px; width: auto; margin: 4px 4px 0 0; }
-  .row { display: flex; gap: 8px; }
-  .row > * { flex: 1; }
-  .card { background: #fafbfc; padding: 12px; border-radius: 10px; margin: 8px 0; border-left: 4px solid #1a73e8; }
-  .card.due { border-left-color: #e53935; background: #fff5f5; }
-  .card h4 { color: #111; margin-bottom: 6px; font-size: 15px; }
-  .card p { font-size: 13px; color: #555; margin: 3px 0; }
-  .hidden { display: none !important; }
-  .reminder { background: #fff3cd; border-left: 4px solid #ff9800; padding: 10px; border-radius: 8px; margin: 8px 0; font-size: 14px; }
-  .reminder.danger { background: #ffebee; border-left-color: #e53935; }
-  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-left: 6px; color: white; }
-  .badge.red { background: #e53935; }
-  .badge.green { background: #25D366; }
-  .badge.blue { background: #1a73e8; }
-  .stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-  .stat { background: linear-gradient(135deg, #1a73e8, #4a90e2); color: white; padding: 12px; border-radius: 10px; text-align: center; }
-  .stat b { display: block; font-size: 22px; }
-  .stat span { font-size: 11px; opacity: 0.9; }
-  .stat.red { background: linear-gradient(135deg, #e53935, #ff6b6b); }
-  .stat.green { background: linear-gradient(135deg, #25D366, #52d984); }
-  .tabs { display: flex; background: #f0f2f5; border-radius: 8px; padding: 4px; margin-bottom: 12px; }
-  .tabs button { background: transparent; color: #555; margin: 0; padding: 8px; border-radius: 6px; font-weight: normal; }
-  .tabs button.active { background: white; color: #1a73e8; font-weight: bold; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  .empty { text-align: center; color: #999; padding: 30px 10px; font-size: 14px; }
-  .footer-actions { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 10px 12px; box-shadow: 0 -2px 10px rgba(0,0,0,0.08); display: flex; gap: 8px; max-width: 520px; margin: auto; }
-  .footer-actions button { margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+body { background: #eef1f6; padding: 12px; padding-bottom: 80px; }
+.container { max-width: 520px; margin: auto; }
+.box { background: white; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+h2 { color: #1a73e8; margin-bottom: 12px; }
+input, select, textarea, button { width: 100%; padding: 12px; margin: 6px 0; border-radius: 8px; border: 1px solid #ccd2dd; font-size: 15px; }
+button { background: #1a73e8; color: white; border: none; cursor: pointer; font-weight: bold; }
+.btn-green { background: #25D366; }
+.btn-orange { background: #ff6b00; }
+.btn-red { background: #e53935; }
+.btn-gray { background: #6b7280; }
+.btn-sm { padding: 8px 12px; font-size: 13px; width: auto; margin: 4px 4px 0 0; }
+.row { display: flex; gap: 8px; }
+.row > * { flex: 1; }
+.card { background: #fafbfc; padding: 12px; border-radius: 10px; margin: 8px 0; border-left: 4px solid #1a73e8; }
+.card.due { border-left-color: #e53935; background: #fff5f5; }
+.card h4 { color: #111; margin-bottom: 6px; }
+.card p { font-size: 13px; color: #555; margin: 3px 0; }
+.hidden { display: none !important; }
+.reminder { background: #fff3cd; border-left: 4px solid #ff9800; padding: 10px; border-radius: 8px; margin: 8px 0; }
+.reminder.danger { background: #ffebee; border-left-color: #e53935; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-left: 6px; color: white; }
+.badge.red { background: #e53935; }
+.stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.stat { background: #1a73e8; color: white; padding: 12px; border-radius: 10px; text-align: center; }
+.stat b { display: block; font-size: 22px; }
+.stat span { font-size: 11px; }
+.stat.red { background: #e53935; }
+.stat.green { background: #25D366; }
+.empty { text-align: center; color: #999; padding: 30px 10px; }
+.footer-actions { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 10px 12px; display: flex; gap: 8px; max-width: 520px; margin: auto; }
+.footer-actions button { margin: 0; }
 </style>
 </head>
 <body>
-
 <div class="container">
-
-  <!-- ================= PAGE 1: HOME ================= -->
   <div id="page1">
     <div class="box">
       <h2>🏍️ Garage Service Reminder</h2>
@@ -62,46 +50,32 @@
         <div class="stat green"><b id="statMonth">0</b><span>Is Mahine</span></div>
       </div>
       <div id="reminders"></div>
-      <input type="text" id="search" placeholder="🔍 Naam / vehicle no / phone search karein..." oninput="renderCustomers()">
+      <input type="text" id="search" placeholder="🔍 Search karein..." oninput="renderCustomers()">
     </div>
     <div class="box">
       <h3>📋 Customer List</h3>
       <div id="customerList"></div>
     </div>
   </div>
-
-  <!-- ================= PAGE 2: ADD CUSTOMER ================= -->
   <div id="page2" class="hidden">
     <div class="box">
       <h2>➕ Naya Customer</h2>
       <input type="text" id="custName" placeholder="Customer ka naam">
-      <input type="tel" id="custPhone" placeholder="Phone (10 digit)" maxlength="10" inputmode="numeric">
+      <input type="tel" id="custPhone" placeholder="Phone (10 digit)" maxlength="10">
       <div class="row">
         <button class="btn-green" onclick="saveCustomer()">Save & Next →</button>
         <button class="btn-gray" onclick="showPage('page1')">← Back</button>
       </div>
     </div>
   </div>
-
-  <!-- ================= PAGE 3: VEHICLE + SERVICE ================= -->
   <div id="page3" class="hidden">
     <div class="box">
       <h2>🏍️ Vehicle & Service</h2>
-
-      <input type="text" id="vehNumber" placeholder="Vehicle Number (MH12AB1234)" style="text-transform:uppercase">
-      
-      <select id="vehCompany" onchange="loadModels()">
-        <option value="">-- Company chunein --</option>
-      </select>
-      
-      <select id="vehModel">
-        <option value="">-- Pehle company chunein --</option>
-      </select>
-
-      <input type="number" id="currentKm" placeholder="Current Kilometer" inputmode="numeric">
+      <input type="text" id="vehNumber" placeholder="Vehicle Number">
+      <select id="vehCompany" onchange="loadModels()"><option value="">-- Company chunein --</option></select>
+      <select id="vehModel"><option value="">-- Model chunein --</option></select>
+      <input type="number" id="currentKm" placeholder="Current Kilometer">
       <input type="date" id="serviceDate">
-      
-      <label style="font-size:13px;color:#555;margin-top:6px;display:block">Service interval (KM):</label>
       <select id="serviceKm">
         <option value="700">700 km</option>
         <option value="1000">1000 km</option>
@@ -111,62 +85,49 @@
         <option value="3000">3000 km</option>
         <option value="3500">3500 km</option>
       </select>
-
-      <input type="number" id="billAmount" placeholder="Bill Amount ₹ (optional)" inputmode="numeric">
-      <textarea id="notes" placeholder="Notes / kaam ki details (optional)"></textarea>
-
+      <input type="number" id="billAmount" placeholder="Bill Amount ₹ (optional)">
+      <textarea id="notes" placeholder="Notes (optional)"></textarea>
       <div class="reminder" id="autoCalc"></div>
-
       <div class="row">
-        <button class="btn-green" onclick="saveVehicle()">💾 Save & Send SMS</button>
+        <button class="btn-green" onclick="saveVehicle()">💾 Save & SMS</button>
         <button class="btn-gray" onclick="showPage('page1')">← Back</button>
       </div>
     </div>
   </div>
-
-  <!-- ================= PAGE 4: CUSTOMER DETAIL / HISTORY ================= -->
   <div id="page4" class="hidden">
     <div class="box">
       <h2>👤 Customer Detail</h2>
       <div id="custDetail"></div>
-      <h3 style="margin-top:14px">📜 Service History</h3>
+      <h3>📜 Service History</h3>
       <div id="serviceHistory"></div>
       <button class="btn-gray" onclick="showPage('page1')">← Back</button>
     </div>
   </div>
-
 </div>
-
-<!-- Fixed Footer -->
 <div class="footer-actions">
   <button class="btn-green" onclick="showPage('page2')">➕ Add Customer</button>
   <button class="btn-orange" onclick="exportData()">📤 Backup</button>
   <button class="btn-gray" onclick="importData()">📥 Restore</button>
 </div>
-
 <input type="file" id="importFile" accept=".json" class="hidden" onchange="handleImport(event)">
-
 <script>
-// ================= VEHICLE DATABASE (India) =================
-const vehicleDB = {
+var vehicleDB = {
   "Hero": ["Splendor Plus", "HF Deluxe", "Passion Pro", "Glamour", "Xtreme 160R", "Destini 125", "Xpulse 200"],
   "Honda": ["Activa 6G", "Activa 125", "Shine", "Unicorn", "SP 125", "Dio", "Hornet 2.0", "CB350"],
   "Bajaj": ["Pulsar 150", "Pulsar NS200", "Platina", "CT 100", "Avenger 220", "Chetak", "Dominar 400"],
   "TVS": ["Jupiter", "Ntorq 125", "Apache RTR 160", "Raider 125", "Sport", "XL100", "Ronin"],
   "Yamaha": ["FZ-S", "MT-15", "R15", "Fascino 125", "Ray ZR", "Aerox"],
-  "Royal Enfield": ["Classic 350", "Bullet 350", "Hunter 350", "Meteor 350", "Himalayan", "Interceptor 650"],
+  "Royal Enfield": ["Classic 350", "Bullet 350", "Hunter 350", "Meteor 350", "Himalayan"],
   "Suzuki": ["Access 125", "Burgman Street", "Gixxer", "Avenis"],
-  "Ola": ["S1", "S1 Pro", "S1 Air", "S1 X"],
+  "Ola": ["S1", "S1 Pro", "S1 Air"],
   "Ather": ["450X", "450 Plus", "Rizta"],
   "Jawa": ["Jawa 42", "Jawa Classic", "Perak"],
-  "KTM": ["Duke 200", "Duke 390", "RC 200", "RC 390"],
+  "KTM": ["Duke 200", "Duke 390", "RC 200"],
   "Other": ["Custom Model"]
 };
 
-let currentCustomer = null;
-let viewingCustomerId = null;
+var currentCustomer = null;
 
-// ================= INIT =================
 window.onload = function() {
   loadCompanies();
   renderCustomers();
@@ -175,96 +136,90 @@ window.onload = function() {
 };
 
 function loadCompanies() {
-  const sel = document.getElementById("vehCompany");
-  Object.keys(vehicleDB).forEach(c => {
-    const opt = document.createElement("option");
+  var sel = document.getElementById("vehCompany");
+  for (var c in vehicleDB) {
+    var opt = document.createElement("option");
     opt.value = c; opt.textContent = c;
     sel.appendChild(opt);
-  });
+  }
 }
 
 function loadModels() {
-  const company = document.getElementById("vehCompany").value;
-  const modelSel = document.getElementById("vehModel");
+  var company = document.getElementById("vehCompany").value;
+  var modelSel = document.getElementById("vehModel");
   modelSel.innerHTML = '<option value="">-- Model chunein --</option>';
   if (vehicleDB[company]) {
-    vehicleDB[company].forEach(m => {
-      const opt = document.createElement("option");
+    vehicleDB[company].forEach(function(m) {
+      var opt = document.createElement("option");
       opt.value = m; opt.textContent = m;
       modelSel.appendChild(opt);
     });
   }
 }
 
-// Auto-calc next service KM
 document.addEventListener("input", function(e) {
   if (e.target.id === "currentKm" || e.target.id === "serviceKm") {
-    const cur = parseInt(document.getElementById("currentKm").value) || 0;
-    const interval = parseInt(document.getElementById("serviceKm").value) || 0;
-    const next = cur + interval;
-    document.getElementById("autoCalc").innerHTML = 
-      `🔧 Agla service: <b>${next} km</b> par (Current ${cur} + ${interval})`;
+    var cur = parseInt(document.getElementById("currentKm").value) || 0;
+    var interval = parseInt(document.getElementById("serviceKm").value) || 0;
+    document.getElementById("autoCalc").innerHTML = "🔧 Agla service: <b>" + (cur + interval) + " km</b> par";
   }
 });
 
-// ================= NAVIGATION =================
 function showPage(p) {
-  ["page1","page2","page3","page4"].forEach(id => document.getElementById(id).classList.add("hidden"));
+  ["page1","page2","page3","page4"].forEach(function(id) {
+    document.getElementById(id).classList.add("hidden");
+  });
   document.getElementById(p).classList.remove("hidden");
   window.scrollTo(0,0);
 }
 
-// ================= SAVE CUSTOMER =================
 function saveCustomer() {
-  const name = document.getElementById("custName").value.trim();
-  const phone = document.getElementById("custPhone").value.trim();
+  var name = document.getElementById("custName").value.trim();
+  var phone = document.getElementById("custPhone").value.trim();
   if (!name) { alert("Naam daalein!"); return; }
   if (phone.length !== 10) { alert("10 digit phone number daalein!"); return; }
-  
-  currentCustomer = { name, phone, id: Date.now() };
+  currentCustomer = { name: name, phone: phone, id: Date.now() };
   document.getElementById("custName").value = "";
   document.getElementById("custPhone").value = "";
   showPage("page3");
 }
 
-// ================= SAVE VEHICLE + SEND SMS =================
 function saveVehicle() {
-  const vehNumber = document.getElementById("vehNumber").value.trim().toUpperCase();
-  const company = document.getElementById("vehCompany").value;
-  const model = document.getElementById("vehModel").value;
-  const currentKm = parseInt(document.getElementById("currentKm").value) || 0;
-  const serviceDate = document.getElementById("serviceDate").value;
-  const serviceKm = parseInt(document.getElementById("serviceKm").value) || 0;
-  const billAmount = document.getElementById("billAmount").value.trim();
-  const notes = document.getElementById("notes").value.trim();
+  var vehNumber = document.getElementById("vehNumber").value.trim().toUpperCase();
+  var company = document.getElementById("vehCompany").value;
+  var model = document.getElementById("vehModel").value;
+  var currentKm = parseInt(document.getElementById("currentKm").value) || 0;
+  var serviceDate = document.getElementById("serviceDate").value;
+  var serviceKm = parseInt(document.getElementById("serviceKm").value) || 0;
+  var billAmount = document.getElementById("billAmount").value.trim();
+  var notes = document.getElementById("notes").value.trim();
 
   if (!vehNumber || !company || !model || !currentKm || !serviceDate) {
     alert("Saari zaroori details bharein!");
     return;
   }
 
-  const nextServiceKm = currentKm + serviceKm;
-
-  const record = {
-    ...currentCustomer,
-    vehNumber, company, model, currentKm, serviceDate, serviceKm, nextServiceKm,
-    billAmount, notes,
-    createdAt: new Date().toISOString(),
-    history: []
+  var record = {
+    name: currentCustomer.name, phone: currentCustomer.phone, id: currentCustomer.id,
+    vehNumber: vehNumber, company: company, model: model,
+    currentKm: currentKm, serviceDate: serviceDate, serviceKm: serviceKm,
+    nextServiceKm: currentKm + serviceKm,
+    billAmount: billAmount, notes: notes,
+    createdAt: new Date().toISOString(), history: []
   };
 
-  const all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
+  var all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
   all.push(record);
   localStorage.setItem("garageCustomers", JSON.stringify(all));
 
-  // Send SMS via user's own number
-  const smsMsg = `Namaste ${currentCustomer.name} ji, aapki ${company} ${model} (${vehNumber}) ka service due hai. Date: ${serviceDate}, Next: ${nextServiceKm} km. Kripya garage aayein. Dhanyavaad!`;
+  var smsMsg = "Namaste " + currentCustomer.name + " ji, aapki " + company + " " + model + " (" + vehNumber + ") ka service due hai. Date: " + serviceDate + ", Next: " + (currentKm + serviceKm) + " km. Kripya garage aayein.";
   sendSMS(currentCustomer.phone, smsMsg);
 
-  // Reset form
-  ["vehNumber","currentKm","serviceDate","billAmount","notes"].forEach(id => document.getElementById(id).value = "");
+  ["vehNumber","currentKm","serviceDate","billAmount","notes"].forEach(function(id) {
+    document.getElementById(id).value = "";
+  });
   document.getElementById("vehCompany").value = "";
-  document.getElementById("vehModel").innerHTML = '<option value="">-- Pehle company chunein --</option>';
+  document.getElementById("vehModel").innerHTML = '<option value="">-- Model chunein --</option>';
   document.getElementById("autoCalc").innerHTML = "";
 
   renderCustomers();
@@ -273,175 +228,143 @@ function saveVehicle() {
   showPage("page1");
 }
 
-// ================= SMS via own number =================
 function sendSMS(phone, message) {
-  // Android: sms: body ; iOS: &body=
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-  const sep = isIOS ? "&" : "?";
-  const url = `sms:+91${phone}${sep}body=${encodeURIComponent(message)}`;
-  window.location.href = url;
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  var sep = isIOS ? "&" : "?";
+  window.location.href = "sms:+91" + phone + sep + "body=" + encodeURIComponent(message);
 }
 
-// ================= RENDER CUSTOMER LIST =================
 function renderCustomers() {
-  const query = (document.getElementById("search").value || "").toLowerCase();
-  const all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
-  const list = document.getElementById("customerList");
+  var query = (document.getElementById("search").value || "").toLowerCase();
+  var all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
+  var list = document.getElementById("customerList");
   list.innerHTML = "";
 
-  const filtered = all.filter(c => 
-    c.name.toLowerCase().includes(query) || 
-    c.vehNumber.toLowerCase().includes(query) ||
-    c.phone.includes(query) ||
-    c.company.toLowerCase().includes(query) ||
-    c.model.toLowerCase().includes(query)
-  );
+  var filtered = all.filter(function(c) {
+    return c.name.toLowerCase().indexOf(query) > -1 ||
+           c.vehNumber.toLowerCase().indexOf(query) > -1 ||
+           c.phone.indexOf(query) > -1 ||
+           c.company.toLowerCase().indexOf(query) > -1 ||
+           c.model.toLowerCase().indexOf(query) > -1;
+  });
 
   if (filtered.length === 0) {
-    list.innerHTML = "<div class='empty'>Koi customer nahi mila.➕ Add Customer dabayein.</div>";
+    list.innerHTML = "<div class='empty'>Koi customer nahi mila.</div>";
     return;
   }
 
-  const today = new Date().toISOString().split("T")[0];
-
-  filtered.forEach(c => {
-    const isDue = c.serviceDate <= today;
-    const div = document.createElement("div");
+  var today = new Date().toISOString().split("T")[0];
+  filtered.forEach(function(c) {
+    var isDue = c.serviceDate <= today;
+    var div = document.createElement("div");
     div.className = "card" + (isDue ? " due" : "");
-    div.innerHTML = `
-      <h4>${c.name} ${isDue ? '<span class="badge red">DUE</span>' : ''}</h4>
-      <p>📞 ${c.phone}</p>
-      <p>🏍️ ${c.company} ${c.model} — <b>${c.vehNumber}</b></p>
-      <p>📍 Current: ${c.currentKm} km | 🔧 Next: <b>${c.nextServiceKm} km</b></p>
-      <p>📅 Service Date: ${c.serviceDate}</p>
-      ${c.billAmount ? `<p>💰 Bill: ₹${c.billAmount}</p>` : ""}
-      <div style="margin-top:6px">
-        <button class="btn-sm btn-green" onclick="event.stopPropagation();whatsappCustomer(${c.id})">💬 WhatsApp</button>
-        <button class="btn-sm btn-orange" onclick="event.stopPropagation();sendReminderSMS(${c.id})">📱 SMS</button>
-        <button class="btn-sm" onclick="event.stopPropagation();viewCustomer(${c.id})">👁️ View</button>
-      </div>
-    `;
-    div.onclick = () => viewCustomer(c.id);
+    div.innerHTML = 
+      "<h4>" + c.name + (isDue ? ' <span class="badge red">DUE</span>' : '') + "</h4>" +
+      "<p>📞 " + c.phone + "</p>" +
+      "<p>🏍️ " + c.company + " " + c.model + " — <b>" + c.vehNumber + "</b></p>" +
+      "<p>📍 Current: " + c.currentKm + " km | 🔧 Next: <b>" + c.nextServiceKm + " km</b></p>" +
+      "<p>📅 Service Date: " + c.serviceDate + "</p>" +
+      (c.billAmount ? "<p>💰 Bill: ₹" + c.billAmount + "</p>" : "") +
+      '<div style="margin-top:6px">' +
+        '<button class="btn-sm btn-green" onclick="event.stopPropagation();whatsappCustomer(' + c.id + ')">💬 WhatsApp</button>' +
+        '<button class="btn-sm btn-orange" onclick="event.stopPropagation();sendReminderSMS(' + c.id + ')">📱 SMS</button>' +
+        '<button class="btn-sm" onclick="event.stopPropagation();viewCustomer(' + c.id + ')">👁️ View</button>' +
+      '</div>';
+    div.onclick = function() { viewCustomer(c.id); };
     list.appendChild(div);
   });
 }
 
-// ================= STATS =================
 function updateStats() {
-  const all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
-  const today = new Date().toISOString().split("T")[0];
-  const thisMonth = today.substring(0, 7);
-
-  const due = all.filter(c => c.serviceDate <= today).length;
-  const month = all.filter(c => c.serviceDate.startsWith(thisMonth)).length;
-
+  var all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
+  var today = new Date().toISOString().split("T")[0];
+  var thisMonth = today.substring(0, 7);
   document.getElementById("statTotal").textContent = all.length;
-  document.getElementById("statDue").textContent = due;
-  document.getElementById("statMonth").textContent = month;
+  document.getElementById("statDue").textContent = all.filter(function(c) { return c.serviceDate <= today; }).length;
+  document.getElementById("statMonth").textContent = all.filter(function(c) { return c.serviceDate.indexOf(thisMonth) === 0; }).length;
 }
 
-// ================= REMINDERS =================
 function checkReminders() {
-  const all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
-  const today = new Date().toISOString().split("T")[0];
-  const box = document.getElementById("reminders");
+  var all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
+  var today = new Date().toISOString().split("T")[0];
+  var box = document.getElementById("reminders");
   box.innerHTML = "";
-
-  const dueList = all.filter(c => c.serviceDate <= today);
-  if (dueList.length === 0) return;
-
-  dueList.forEach(c => {
-    box.innerHTML += `<div class="reminder danger">⚠️ <b>${c.name}</b> (${c.vehNumber}) ka service <b>${c.serviceDate}</b> ko due tha! 
-      <button class="btn-sm btn-green" onclick="whatsappCustomer(${c.id})">WhatsApp</button>
-      <button class="btn-sm btn-orange" onclick="sendReminderSMS(${c.id})">SMS</button>
-    </div>`;
+  all.filter(function(c) { return c.serviceDate <= today; }).forEach(function(c) {
+    box.innerHTML += '<div class="reminder danger">⚠️ <b>' + c.name + '</b> (' + c.vehNumber + ') ka service <b>' + c.serviceDate + '</b> ko due tha! ' +
+      '<button class="btn-sm btn-green" onclick="whatsappCustomer(' + c.id + ')">WhatsApp</button>' +
+      '<button class="btn-sm btn-orange" onclick="sendReminderSMS(' + c.id + ')">SMS</button></div>';
   });
 }
 
-// ================= ACTIONS =================
 function whatsappCustomer(id) {
-  const all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
-  const c = all.find(x => x.id === id);
-  const msg = `Namaste ${c.name} ji 🙏\nAapki ${c.company} ${c.model} (${c.vehNumber}) ka service due hai.\n📅 Date: ${c.serviceDate}\n🔧 Next: ${c.nextServiceKm} km\nKripya garage aayein. Dhanyavaad!`;
-  window.open(`https://wa.me/91${c.phone}?text=${encodeURIComponent(msg)}`, "_blank");
+  var all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
+  var c = all.find(function(x) { return x.id === id; });
+  var msg = "Namaste " + c.name + " ji 🙏\nAapki " + c.company + " " + c.model + " (" + c.vehNumber + ") ka service due hai.\n📅 Date: " + c.serviceDate + "\n🔧 Next: " + c.nextServiceKm + " km";
+  window.open("https://wa.me/91" + c.phone + "?text=" + encodeURIComponent(msg), "_blank");
 }
 
 function sendReminderSMS(id) {
-  const all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
-  const c = all.find(x => x.id === id);
-  const msg = `Namaste ${c.name} ji, aapki ${c.company} ${c.model} (${c.vehNumber}) ka service due hai. Date: ${c.serviceDate}, Next: ${c.nextServiceKm} km. Kripya garage aayein. Dhanyavaad!`;
+  var all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
+  var c = all.find(function(x) { return x.id === id; });
+  var msg = "Namaste " + c.name + " ji, aapki " + c.company + " " + c.model + " (" + c.vehNumber + ") ka service due hai.";
   sendSMS(c.phone, msg);
 }
 
 function viewCustomer(id) {
-  const all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
-  const c = all.find(x => x.id === id);
+  var all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
+  var c = all.find(function(x) { return x.id === id; });
   if (!c) return;
-  viewingCustomerId = id;
+  document.getElementById("custDetail").innerHTML = 
+    '<div class="card">' +
+      '<h4>' + c.name + '</h4>' +
+      '<p>📞 ' + c.phone + '</p>' +
+      '<p>🏍️ ' + c.company + ' ' + c.model + ' — <b>' + c.vehNumber + '</b></p>' +
+      '<p>📍 Current KM: ' + c.currentKm + '</p>' +
+      '<p>📅 Service Date: ' + c.serviceDate + '</p>' +
+      '<p>➡️ Next Service: <b>' + c.nextServiceKm + ' km</b></p>' +
+      (c.billAmount ? '<p>💰 Bill: ₹' + c.billAmount + '</p>' : '') +
+      '<div style="margin-top:10px">' +
+        '<button class="btn-sm btn-green" onclick="whatsappCustomer(' + c.id + ')">💬 WhatsApp</button>' +
+        '<button class="btn-sm btn-orange" onclick="sendReminderSMS(' + c.id + ')">📱 SMS</button>' +
+        '<button class="btn-sm" onclick="addService(' + c.id + ')">➕ New Service</button>' +
+        '<button class="btn-sm btn-red" onclick="deleteCustomer(' + c.id + ')">🗑️ Delete</button>' +
+      '</div></div>';
 
-  document.getElementById("custDetail").innerHTML = `
-    <div class="card">
-      <h4>${c.name}</h4>
-      <p>📞 ${c.phone}</p>
-      <p>🏍️ ${c.company} ${c.model} — <b>${c.vehNumber}</b></p>
-      <p>📍 Current KM: ${c.currentKm}</p>
-      <p>📅 Service Date: ${c.serviceDate}</p>
-      <p>🔧 Service Interval: ${c.serviceKm} km</p>
-      <p>➡️ Next Service: <b>${c.nextServiceKm} km</b></p>
-      ${c.billAmount ? `<p>💰 Bill: ₹${c.billAmount}</p>` : ""}
-      ${c.notes ? `<p>📝 ${c.notes}</p>` : ""}
-      <div style="margin-top:10px">
-        <button class="btn-sm btn-green" onclick="whatsappCustomer(${c.id})">💬 WhatsApp</button>
-        <button class="btn-sm btn-orange" onclick="sendReminderSMS(${c.id})">📱 SMS</button>
-        <button class="btn-sm" onclick="addService(${c.id})">➕ New Service</button>
-        <button class="btn-sm btn-red" onclick="deleteCustomer(${c.id})">🗑️ Delete</button>
-      </div>
-    </div>
-  `;
-
-  const hist = document.getElementById("serviceHistory");
+  var hist = document.getElementById("serviceHistory");
   if (!c.history || c.history.length === 0) {
     hist.innerHTML = "<div class='empty'>Abhi koi purani service nahi hai.</div>";
   } else {
-    hist.innerHTML = c.history.map(h => `
-      <div class="card">
-        <p><b>${h.date}</b></p>
-        <p>KM: ${h.km} | Bill: ₹${h.bill || 0}</p>
-        ${h.notes ? `<p>📝 ${h.notes}</p>` : ""}
-      </div>
-    `).reverse().join("");
+    hist.innerHTML = c.history.map(function(h) {
+      return '<div class="card"><p><b>' + h.date + '</b></p><p>KM: ' + h.km + ' | Bill: ₹' + (h.bill || 0) + '</p></div>';
+    }).reverse().join("");
   }
-
   showPage("page4");
 }
 
 function addService(id) {
-  const all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
-  const c = all.find(x => x.id === id);
-  const km = prompt("Naya current KM daalein:");
+  var all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
+  var c = all.find(function(x) { return x.id === id; });
+  var km = prompt("Naya current KM daalein:");
   if (!km) return;
-  const bill = prompt("Bill amount ₹:") || "0";
-  const notes = prompt("Notes (optional):") || "";
-  const date = new Date().toISOString().split("T")[0];
-
-  c.history = c.history || [];
-  c.history.push({ date, km: parseInt(km), bill, notes });
+  var bill = prompt("Bill amount ₹:") || "0";
+  var notes = prompt("Notes (optional):") || "";
+  var date = new Date().toISOString().split("T")[0];
+  if (!c.history) c.history = [];
+  c.history.push({ date: date, km: parseInt(km), bill: bill, notes: notes });
   c.currentKm = parseInt(km);
   c.nextServiceKm = c.currentKm + c.serviceKm;
   c.billAmount = bill;
-  c.notes = notes;
-
   localStorage.setItem("garageCustomers", JSON.stringify(all));
   viewCustomer(id);
   renderCustomers();
   updateStats();
-  alert("Service record add ho gaya! ✅");
+  alert("Service record add ho gaya!");
 }
 
 function deleteCustomer(id) {
   if (!confirm("Pakka delete karein?")) return;
-  let all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
-  all = all.filter(x => x.id !== id);
+  var all = JSON.parse(localStorage.getItem("garageCustomers") || "[]");
+  all = all.filter(function(x) { return x.id !== id; });
   localStorage.setItem("garageCustomers", JSON.stringify(all));
   renderCustomers();
   updateStats();
@@ -449,16 +372,14 @@ function deleteCustomer(id) {
   showPage("page1");
 }
 
-// ================= EXPORT / IMPORT =================
 function exportData() {
-  const all = localStorage.getItem("garageCustomers") || "[]";
-  const blob = new Blob([all], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
+  var all = localStorage.getItem("garageCustomers") || "[]";
+  var blob = new Blob([all], { type: "application/json" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
   a.href = url;
-  a.download = `garage-backup-${new Date().toISOString().split("T")[0]}.json`;
+  a.download = "garage-backup-" + new Date().toISOString().split("T")[0] + ".json";
   a.click();
-  URL.revokeObjectURL(url);
 }
 
 function importData() {
@@ -466,13 +387,25 @@ function importData() {
 }
 
 function handleImport(e) {
-  const file = e.target.files[0];
+  var file = e.target.files[0];
   if (!file) return;
-  const reader = new FileReader();
+  var reader = new FileReader();
   reader.onload = function(ev) {
     try {
-      const data = JSON.parse(ev.target.result);
+      var data = JSON.parse(ev.target.result);
       if (!Array.isArray(data)) throw new Error("Invalid");
-      if (!confirm(`${data.length} customers mile. Purana data replace karein?`)) return;
+      if (!confirm(data.length + " customers mile. Purana data replace karein?")) return;
       localStorage.setItem("garageCustomers", JSON.stringify(data));
-      renderC
+      renderCustomers();
+      updateStats();
+      checkReminders();
+      alert("Restore ho gaya!");
+    } catch (err) {
+      alert("File sahi nahi hai!");
+    }
+  };
+  reader.readAsText(file);
+}
+</script>
+</body>
+</html>
